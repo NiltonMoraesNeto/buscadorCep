@@ -4,10 +4,19 @@ import "./styles.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "./services/api";
+import { mask } from "./teste"
 
 function App() {
   const [inputCep, setInputCep] = useState("");
   const [cep, setCep] = useState({});
+
+  const [valor, setValor] = useState('')
+
+function handleChangeMask(event) {
+    const { value } = event.target
+
+    setValor(mask(value))
+}
 
   async function handlePesquisar() {
     if (inputCep === "") {
@@ -57,6 +66,10 @@ function App() {
           <FiSearch size={25} color="#FFF" />
         </button>
         <ToastContainer />
+      </div>
+      <div className="containerInput">
+<input onChange={handleChangeMask} value={valor} placeholder="CPF ou CNPJ"/>
+
       </div>
 
       {Object.keys(cep).length > 0 && (
